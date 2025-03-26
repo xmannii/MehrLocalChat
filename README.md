@@ -14,6 +14,22 @@ A modern, elegant local AI chatbot application that connects with Ollama to prov
 
 Just download `MehrLocalChat-Setup.exe` from the releases page and run it to install Mehr on your Windows system.
 
+> **⚠️ Known Issue**: Due to a current Vite limitation, the installer won't create a desktop shortcut automatically. You have two options:
+>
+> **Option 1: Pin to Taskbar (Recommended)**
+> 1. Launch the app from Start Menu
+> 2. Right-click the app icon in the taskbar
+> 3. Click "Pin to taskbar"
+> 
+> **Option 2: Create Desktop Shortcut**
+> 1. Pin to taskbar first (follow Option 1)
+> 2. Right-click the pinned icon in taskbar
+> 3. Right-click "Mehr" in the menu
+> 4. Click "Properties"
+> 5. Click "Open File Location"
+> 6. Right-click the application and select "Create shortcut"
+> 7. Move the shortcut to your desktop
+
 ## Features ✨
 
 - 🤖 **Local AI Integration**: Connects with Ollama to run AI models locally on your machine
@@ -57,6 +73,7 @@ This project is built upon the excellent [electron-shadcn](https://github.com/Lu
 1. Download the [Windows Installer](https://github.com/xmannii/MehrLocalChat/releases/tag/v1)
 2. Run `MehrLocalChat-Setup.exe`
 3. Follow the installation wizard
+4. **Important**: To create a desktop shortcut, follow the steps in the note above about the known Vite issue
 
 ### Option 2: Build from Source
 ```bash
