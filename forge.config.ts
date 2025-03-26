@@ -27,6 +27,7 @@ const config: ForgeConfig = {
     new MakerSquirrel({
       iconUrl: path.resolve(__dirname, 'assets', 'icon.ico'),
       setupIcon: path.resolve(__dirname, 'assets', 'icon.ico'),
+      loadingGif: path.resolve(__dirname, 'assets', 'install.png'),
       name: "MehrLocalChat",
       authors: "Maux Platform",
       description: "Mehr|Local Chat - Your Local AI Chat Application",
