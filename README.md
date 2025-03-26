@@ -2,6 +2,10 @@
 
 A modern, elegant local AI chatbot application that connects with Ollama to provide a seamless chat experience with various LLM models.
 
+> **⚠️ Currently Windows Only**: This application is currently only available for Windows. Support for other platforms coming soon!
+
+> ⭐ If you find this project helpful, please consider giving it a star! It helps others discover the project.
+
 ![Mehr Logo](assets/Mehr-Banner.png)
 
 ## Features ✨
@@ -18,6 +22,10 @@ A modern, elegant local AI chatbot application that connects with Ollama to prov
   - Message history within conversations
   - Markdown formatting support
   - Emoji support 🎉
+
+## Template Credit 🙌
+
+This project is built upon the excellent [electron-shadcn](https://github.com/LuanRoger/electron-shadcn) template, which provided the foundational structure for combining Electron with shadcn/ui. I've extended it significantly to create a full-featured AI chat application.
 
 ## Coming Soon 🚀
 
