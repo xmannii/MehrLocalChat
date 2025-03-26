@@ -8,6 +8,12 @@ A modern, elegant local AI chatbot application that connects with Ollama to prov
 
 ![Mehr Logo](assets/Mehr-Banner.png)
 
+## Quick Install 📥
+
+**Windows Users**: [Download the latest installer](https://github.com/xmannii/MehrLocalChat/releases/tag/v1)
+
+Just download `MehrLocalChat-Setup.exe` from the releases page and run it to install Mehr on your Windows system.
+
 ## Features ✨
 
 - 🤖 **Local AI Integration**: Connects with Ollama to run AI models locally on your machine
@@ -42,11 +48,17 @@ This project is built upon the excellent [electron-shadcn](https://github.com/Lu
 
 ## Prerequisites 📋
 
-1. [Ollama](hhttps://ollama.com/) installed on your system
-2. Node.js and npm/yarn installed
+1. [Ollama](https://ollama.com/) installed on your system
+2. Node.js and npm/yarn installed (only needed for development)
 
 ## Installation 💻
 
+### Option 1: Direct Download (Recommended for most users)
+1. Download the [Windows Installer](https://github.com/xmannii/MehrLocalChat/releases/tag/v1)
+2. Run `MehrLocalChat-Setup.exe`
+3. Follow the installation wizard
+
+### Option 2: Build from Source
 ```bash
 # Clone the repository
 git clone https://github.com/xmannii/MehrLocalChat
