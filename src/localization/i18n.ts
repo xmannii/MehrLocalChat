@@ -1,0 +1,128 @@
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+
+i18n.use(initReactI18next).init({
+  fallbackLng: "fa",
+  resources: {
+    en: {
+      language: "English",
+      translation: {
+        appName: "Mehr - Local Chatbot",
+        titleHomePage: "Home Page",
+        titleSecondPage: "Second Page",
+        chat: {
+          howCanIHelp: "How can I help you?",
+          welcomeMessage: "Welcome to Mehr",
+          inputPlaceholder: "Write your message here...",
+          welcomeDescription: "Select a model and start chatting!",
+          typePlaceholder: "Type your message...",
+          send: "Send",
+          sending: "Sending...",
+          you: "You",
+          assistant: "Assistant",
+          chatWith: "Chatting with {{model}}",
+          clearChat: "Clear",
+          newChat: "New Chat",
+          errorMessage: "Sorry, I encountered an error. Please try again.",
+          noModelsWarning: "No models found. Please make sure Ollama is running and has models installed.",
+          suggestedPrompts: "Try these examples",
+          enterToSend: "Press Enter to send, Shift+Enter for a new line",
+          examplePrompt1: "How does AI work?",
+          examplePrompt2: "Are black holes real?",
+          examplePrompt3: "How many Rs are in the word \"strawberry\"?",
+          startPrompt: "Select an example or type your own message below",
+          modelSelection: "Model Selection",
+          selectModel: "Select a model",
+          ollamaNotRunning: "Ollama is not running. Please start Ollama and try again.",
+          installOllama: "Install Ollama",
+        },
+        sidebar: {
+          newChat: "New Chat",
+          toggleTheme: "Toggle Theme",
+          collapse: "Collapse Sidebar",
+          expand: "Expand Sidebar",
+          language: "Language",
+          open: "(⌘ + B) Open Sidebar",
+        },
+        chatSettings: {
+          title: "Chat Settings",
+          description: "Adjust parameters for the conversation",
+          temperature: "Temperature",
+          temperatureDescription: "Lower values make responses more focused and deterministic",
+          maxTokens: "Max Tokens",
+          maxTokensDescription: "Maximum length of the generated response",
+          streaming: "Streaming",
+          streamingOn: "Responses appear in real-time",
+          streamingOff: "Responses appear all at once",
+        },
+        common: {
+          save: "Save",
+          cancel: "Cancel",
+          enabled: "Enabled",
+          disabled: "Disabled"
+        }
+      },
+    },
+    "fa": {
+      language: "persian",
+      translation: {
+        appName: "مهر | چت بات هوش مصنوعی",
+        titleHomePage: "صفحه اصلی",
+        titleSecondPage: "صفحه دوم",
+   
+        chat: {
+          howCanIHelp: "چطور می‌تونم کمکتون کنم؟",
+          inputPlaceholder: "پیام خود را اینجا بنویسید...",
+          welcomeMessage: "به مهر خوش آمدید",
+          welcomeDescription: "یک مدل انتخاب کنید و شروع به گفتگو کنید!",
+          typePlaceholder: "پیام خود را بنویسید...",
+          send: "ارسال",
+          sending: "در حال ارسال...",
+          you: "شما",
+          assistant: "دستیار",
+          chatWith: "گفتگو با {{model}}",
+          clearChat: "پاک کردن",
+          newChat: "گفتگوی جدید",
+          errorMessage: "متأسفم، خطایی رخ داد. لطفاً دوباره تلاش کنید.",
+          noModelsWarning: "هیچ مدلی پیدا نشد. لطفاً مطمئن شوید که Ollama در حال اجرا است و مدل‌ها نصب شده‌اند و سپس برنامه را مجدداً راه‌اندازی کنید.",
+          suggestedPrompts: "این مثال‌ها را امتحان کنید",
+          enterToSend: "برای ارسال Enter را فشار دهید، برای خط جدید Shift+Enter",
+          examplePrompt1: "هوش مصنوعی چگونه کار می‌کند؟",
+          examplePrompt2: "آیا سیاه‌چاله‌ها واقعی هستند؟",
+          examplePrompt3: "چند حرف \"ر\" در کلمه \"توت‌فرنگی\" وجود دارد؟",
+          startPrompt: "یک مثال را انتخاب کنید یا پیام خود را در پایین بنویسید",
+          modelSelection: "انتخاب مدل",
+          selectModel: "یک مدل انتخاب کنید",
+          ollamaNotRunning: "در حال اجرا نیست. لطفاً Ollama را راه‌اندازی کنید و دوباره تلاش کنید.",
+          installOllama: "Ollama را نصب کنید",
+        },
+        sidebar: {
+          newChat: "چت جدید",
+          toggleTheme: "تغییر تم",
+          collapse: "بستن نوار کناری",
+          expand: "باز کردن نوار کناری",
+          language: "زبان",
+          open: "(⌘ + B) باز کردن نوار کناری ",
+        },
+        chatSettings: {
+          title: "تنظیمات گفتگو",
+          description: "پارامترها را برای مکالمه تنظیم کنید",
+          temperature: "دما",
+          temperatureDescription: "مقادیر کمتر پاسخ‌ها را متمرکزتر و قطعی‌تر می‌کند",
+          maxTokens: "حداکثر توکن‌ها",
+          maxTokensDescription: "حداکثر طول پاسخ تولید شده",
+          streaming: "پخش زنده",
+          streamingOn: "پاسخ‌ها در زمان واقعی ظاهر می‌شوند",
+          streamingOff: "پاسخ‌ها یکجا ظاهر می‌شوند",
+        },
+        common: {
+          save: "ذخیره",
+          cancel: "لغو",
+          enabled: "فعال",
+          disabled: "غیرفعال"
+        }
+      },
+    },
+  },
+  
+});
