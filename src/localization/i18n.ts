@@ -35,6 +35,10 @@ i18n.use(initReactI18next).init({
           selectModel: "Select a model",
           ollamaNotRunning: "Ollama is not running. Please start Ollama and try again.",
           installOllama: "Install Ollama",
+          thinking: "Thinking...",
+          thought: "Thought Process",
+          copy: "Copy",
+          copied: "Copied!",
         },
         sidebar: {
           newChat: "New Chat",
@@ -95,6 +99,10 @@ i18n.use(initReactI18next).init({
           selectModel: "یک مدل انتخاب کنید",
           ollamaNotRunning: "در حال اجرا نیست. لطفاً Ollama را راه‌اندازی کنید و دوباره تلاش کنید.",
           installOllama: "Ollama را نصب کنید",
+          thinking: "در حال فکر کردن...",
+          thought: "فرآیند فکر",
+          copy: "کپی",
+          copied: "کپی شد!",
         },
         sidebar: {
           newChat: "چت جدید",

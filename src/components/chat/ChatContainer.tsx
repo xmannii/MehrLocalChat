@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useTranslation } from "react-i18next";
 import { ChatHeader } from './ChatHeader';
 import { ChatMessage } from './ChatMessage';
@@ -15,15 +15,74 @@ import { RefreshCw } from 'lucide-react';
 
 export function ChatContainer() {
   const { t } = useTranslation();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [models, setModels] = useState<Model[]>([]);
   const [selectedModel, setSelectedModel] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
+  const lastScrollTop = useRef(0);
   const { settings } = useSettings();
   const [chatSettings, setChatSettings] = useState(settings);
   const [ollamaNotRunning, setOllamaNotRunning] = useState(false);
+
+  // Auto-scroll function
+  const scrollToBottom = useCallback((smooth: boolean = true) => {
+    if (messagesEndRef.current && shouldAutoScroll) {
+      messagesEndRef.current.scrollIntoView({ 
+        behavior: smooth ? 'smooth' : 'auto',
+        block: 'end'
+      });
+    }
+  }, [shouldAutoScroll]);
+
+  // Check if user is at bottom of scroll
+  const isAtBottom = useCallback(() => {
+    if (!chatContainerRef.current) return true;
+    
+    const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
+    const threshold = 50; // Reduced threshold for more accurate detection
+    return scrollHeight - scrollTop - clientHeight <= threshold;
+  }, []);
+
+  // Handle scroll events to detect manual scrolling
+  useEffect(() => {
+    const chatContainer = chatContainerRef.current;
+    if (!chatContainer) return;
+
+    const handleScroll = () => {
+      const currentScrollTop = chatContainer.scrollTop;
+      const scrollingUp = currentScrollTop < lastScrollTop.current;
+      
+      // If user is scrolling up manually, disable auto-scroll
+      if (scrollingUp && !isAtBottom()) {
+        setShouldAutoScroll(false);
+      }
+      // If user manually scrolls to bottom, re-enable auto-scroll
+      else if (isAtBottom()) {
+        setShouldAutoScroll(true);
+      }
+      
+      lastScrollTop.current = currentScrollTop;
+    };
+
+    chatContainer.addEventListener('scroll', handleScroll, { passive: true });
+    return () => chatContainer.removeEventListener('scroll', handleScroll);
+  }, [isAtBottom]);
+
+  // Only auto-scroll when new messages are added (not during streaming updates)
+  const prevMessageCount = useRef(messages.length);
+  useEffect(() => {
+    // Only trigger on new messages (count increased), not content updates
+    if (messages.length > prevMessageCount.current) {
+      prevMessageCount.current = messages.length;
+      // Small delay to ensure message is rendered
+      setTimeout(() => scrollToBottom(), 50);
+    }
+  }, [messages.length, scrollToBottom]);
 
   useEffect(() => {
     setChatSettings(settings);
@@ -51,6 +110,7 @@ export function ChatContainer() {
     const handleNewChat = () => {
       setMessages([]);
       setInputValue('');
+      setShouldAutoScroll(true); // Reset auto-scroll on new chat
       setChatSettings(settings);
     };
 
@@ -73,6 +133,7 @@ export function ChatContainer() {
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     setIsLoading(true);
+    setShouldAutoScroll(true); // Enable auto-scroll for new conversation
 
     try {
       const assistantTimestamp = new Date().toLocaleTimeString();
@@ -93,6 +154,11 @@ export function ChatContainer() {
             }];
           }
         });
+        
+        // Only auto-scroll during streaming if user was at bottom when streaming started
+        if (shouldAutoScroll) {
+          setTimeout(() => scrollToBottom(), 10);
+        }
       };
 
       const response = await ollamaService.sendMessage({
@@ -108,7 +174,7 @@ export function ChatContainer() {
           ...prev, 
           { 
             role: 'assistant', 
-            content: response,
+            content: typeof response === 'string' ? response : response.content,
             timestamp: assistantTimestamp
           }
         ]);
@@ -129,7 +195,7 @@ export function ChatContainer() {
       setIsLoading(false);
       setIsStreaming(false);
     }
-  }, [selectedModel, messages, chatSettings, t]);
+  }, [selectedModel, messages, chatSettings, t, scrollToBottom, shouldAutoScroll]);
 
   const handleStopStreaming = useCallback(() => {
     ollamaService.stopStreaming();
@@ -155,6 +221,7 @@ export function ChatContainer() {
       </Button>
     </div>
   ), [hasModels, t, fetchModels, isLoading]);
+  
   const ollamaNotRunningAlert = useMemo(() => ollamaNotRunning && (
     <div dir="auto" className="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 p-2 text-sm rounded-md mb-2 flex justify-between items-center">
       <span>{t('chat.ollamaNotRunning')}</span>
@@ -199,12 +266,17 @@ export function ChatContainer() {
         onModelChange={setSelectedModel}
       />
       
-      <div className="flex-1 p-4 overflow-auto min-h-[200px] pt-6 scrollbar-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <div 
+        ref={chatContainerRef}
+        className="flex-1 p-4 overflow-auto min-h-[200px] pt-6 scrollbar-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+      >
         {messages.length === 0 ? (
           <ChatWelcome onExampleSelect={handleInputChange} />
         ) : (
           <div className="space-y-4">
             {messageElements}
+            {/* Invisible element for scrolling to bottom */}
+            <div ref={messagesEndRef} />
           </div>
         )}
       </div>
