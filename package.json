@@ -50,7 +50,7 @@
     "electron-playwright-helpers": "^1.7.1",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-prettier": "^5.4.1",
+    "eslint-plugin-prettier": "^5.5.3",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-compiler": "19.0.0-beta-ebf51a3-20250411",
     "globals": "^16.2.0",
